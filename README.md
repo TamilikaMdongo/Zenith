@@ -1,0 +1,2 @@
+# Zenith
+Events Management App
