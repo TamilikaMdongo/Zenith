@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:app/screens/widgets/selected_event.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/event.dart';
 import 'package:app/screens/login.dart';
@@ -13,10 +17,108 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+ final db = FirebaseFirestore.instance;
+  Uint8List _decodeBase64(String base64String) {
+    return base64Decode(base64String);
+  }
+  
+ @override 
+ Widget build(BuildContext context){
+  return Scaffold(
+    appBar: AppBar(),
+    body: StreamBuilder<QuerySnapshot>(
+      stream: db.collection('Event').snapshots(),
+    
+    builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      }
+         if (!snapshot.hasData || snapshot.data == null) {
+        return Center(child: Text("No event data found"));
+      }
+      
+        var eventData = snapshot.data!.docs;
+       //String eventTitle =eventData['title'];
+      return ListView.builder(
+        itemCount: eventData.length, // Total number of events
+        itemBuilder: (context, index) {
+          var events = eventData[index].data() as Map<String, dynamic>; // Convert to Map
+          String eventTitle = events['title'] ?? "No Title"; // Get event title
+          String eventLocation = events['location'] ?? "No Location"; // Get event location
+          String eventImagebase64 = events['eventImage'];
+          String price = events['ticketPrice'];
+          String eventDate = events['date'];
+          Uint8List imagebytes = _decodeBase64(eventImagebase64);
+        String eventId = eventData[index].id;
+         // return ListTile(
+           // title: Text(eventTitle), // Display event title
+            //subtitle: Text(eventLocation),
+             // Display event location
+          //); // ListTile ends
+               if (eventId.isEmpty || eventId == null) {
+  // Handle the case where eventId is empty
+  return Center(child: Text('Event ID is missing.'));
+}
+          else{
+          return Column(
+            children: [
+             
+              GestureDetector(
+                
+                onTap: (){
+                  print(eventId);
+                
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedEvent(eventImage: imagebytes, eventTitle: eventTitle, eventId:eventId, price: price, venue: eventLocation, date: '',)));
+                },
+                child: DisplayEvents(image:imagebytes, title: eventTitle, venue: eventLocation, date: eventDate, price: price,))
+
+                
+            ],
+          );}
+        }, // itemBuilder function ends
+      ); 
+    }),
+  );
+ }
+}
+
+
+
+
+/*
+ // Function to convert Base64 string to an image
+  
+  
+  final db = FirebaseFirestore.instance;
+  String? eventID;
+  String? eventTitle;
+  String? eventImagebase64;
+  
+Future <void> getPreviewData() async{
+  DocumentSnapshot eventDetails = await db.collection('Event').doc('yp1kcvm1DNwG8B7e2akZ').get();
+  setState(() {
+       eventImagebase64 = eventDetails.get('eventImage');
+   eventTitle = eventDetails.get('title');
+  });
+
+  Uint8List _decodeBase64(eventImagebase64) {
+    return base64Decode(eventImagebase64);
+  }
+}
+
+@override
+ void initState() {
+    super.initState();
+    getPreviewData(); // Fetch event data when the screen is initialized
+  }
+
   void doNothing() {}
-  @override
+*/
+
+/*
+ @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -187,7 +289,21 @@ class _HomeState extends State<Home> {
           const SizedBox(height: 30.0),
 
           GestureDetector( onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedEvent(eventImage: 'https://images.unsplash.com/photo-1742199009963-c028d0c5a603?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', eventTitle: 'test event', description: 'an event hosted by me to test the functionality of the darn app', host: 'Tamilika mdogngo', location: 'rossettenville', date: '20 jan', price: '20')));
+            if (eventTitle != null && eventImagebase64 != null) {
+                    // Decode the Base64 string to image
+                    
+
+                    // Navigate to the SelectedEvent widget and pass the data
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SelectedEvent(
+                          eventTitle: eventTitle!,
+                          eventImage: eventImagebase64
+                        ),
+                      ),
+                    );
+                  }
           },
             child: DisplayEvents(
                 image:
@@ -217,5 +333,6 @@ class _HomeState extends State<Home> {
         ]),
       ]),
     );
+   
   }
-}
+*/

@@ -40,7 +40,7 @@ String? getCurrentUserId() {
 
     return Scaffold(
       body: StreamBuilder(
-        stream: db.collection('Event').where('userId', isEqualTo: currentUserId).snapshots(),
+        stream: db.collection('Event').where('userId', isEqualTo: currentUserId).snapshots() ,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -48,7 +48,7 @@ String? getCurrentUserId() {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(child: Text('No events available'));
           }
-          
+        
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
@@ -73,7 +73,7 @@ String? getCurrentUserId() {
                         child: Text(event['title'], style: TextStyle(color: Colors.white),),
                       ),
                       subtitle: Text(event['location']),
-                      trailing: Text(event['ticketPrice']),
+                      trailing: Text('R ${event['ticketPrice']}'),
                       onTap: () {
                         // Navigate to event details if needed
                       },

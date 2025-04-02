@@ -46,6 +46,8 @@ dependencies:
   webview_flutter: ^4.10.0
   flutter_inappwebview: ^6.1.5
   pay_with_paystack: ^1.0.13
+  qr_flutter: ^4.1.0
+  uuid_v4: ^1.0.2
 
 dev_dependencies:
   flutter_test:

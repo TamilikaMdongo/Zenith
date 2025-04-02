@@ -47,7 +47,7 @@ class _RegisterState extends State<Register> {
          password,
          phoneNumber);
   }
-
+Color customColor = Color(0xFFF8F8FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,12 +77,16 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 40.0),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(right: 90),
-              height: 50.0,
-              width: 250.0,
+              margin: EdgeInsets.only(right: 20),
+             
+              width: 300.0,
               child: TextField(
+                
                 controller: _firstNameController,
-                decoration: InputDecoration(
+                decoration: InputDecoration( border: OutlineInputBorder(
+                   borderRadius: BorderRadius.circular(10)
+                ), filled: true,
+                fillColor: customColor,
                     prefixIcon: Icon(Icons.person),
                     hintText: 'First Name',
                     contentPadding: EdgeInsets.all(10)),
@@ -91,12 +95,15 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 20.0),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(right: 90),
-              height: 50.0,
-              width: 250.0,
+              margin: EdgeInsets.only(right: 20),
+            
+              width: 300.0,
               child: TextField(
                 controller: _lastNameController,
-                decoration: InputDecoration(
+                decoration: InputDecoration(border: OutlineInputBorder(
+                   borderRadius: BorderRadius.circular(10)
+                ), filled: true,
+                fillColor: customColor,
                     prefixIcon: Icon(Icons.person),
                     hintText: 'Last Name',
                     contentPadding: EdgeInsets.all(10)),
@@ -105,12 +112,16 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 20.0),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(right: 90),
-              height: 50.0,
-              width: 250.0,
+              margin: EdgeInsets.only(right: 20),
+              
+              width: 300.0,
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                   borderRadius: BorderRadius.circular(10)
+                ), filled: true,
+                fillColor: customColor,
                     prefixIcon: Icon(Icons.email),
                     hintText: 'Email',
                     contentPadding: EdgeInsets.all(10)),
@@ -119,12 +130,17 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 20.0),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(right: 90),
-              height: 50.0,
-              width: 250.0,
+              margin: EdgeInsets.only(right: 20),
+             
+              width: 300.0,
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  
+                ), filled: true,
+                fillColor: customColor,
                     prefixIcon: Icon(Icons.visibility_off),
                     hintText: 'Password',
                     contentPadding: EdgeInsets.all(10)),
@@ -140,7 +156,7 @@ class _RegisterState extends State<Register> {
                   child: Container(
                       height: 30,
                       width: 100,
-                      decoration: BoxDecoration(color: Colors.lightGreen),
+                      decoration: BoxDecoration(color: Colors.black),
                       child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -163,21 +179,24 @@ class _RegisterState extends State<Register> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Login()));
                   },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                        height: 30,
-                        width: 90,
-                        decoration: BoxDecoration(color: Colors.lightGreen),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Register',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        )),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 28.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: 30,
+                          width: 90,
+                          decoration: BoxDecoration(color: Colors.black),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Login',
+                                style: TextStyle(color: Colors.white),
+                              )
+                            ],
+                          )),
+                    ),
                   ),
                 ),
               ],

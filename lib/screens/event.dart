@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:app/screens/widgets/selected_event.dart';
-
+/*
 class Event extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      SelectedEvent(
-          eventImage:
-              'https://images.unsplash.com/photo-1736842666465-5234629bff2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDExfE04alZiTGJUUndzfHxlbnwwfHx8fHw%3D',
-          eventTitle: 'Annual Art Conference',
-          description:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-          host: 'Steve Owens',
-          location: 'New York City',
-          date: '19 April 2025',
-          price: '\250')
-    ]));
+        body: ListView(
+          children:[ Column(children: [
+                SelectedEvent(
+            eventImage:
+                'https://images.unsplash.com/photo-1736842666465-5234629bff2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDExfE04alZiTGJUUndzfHxlbnwwfHx8fHw%3D',
+            eventTitle: 'Annual Art Conference', eventId: '',
+           )
+              ]),]
+        ));
   }
 }
-
+*/
 /* 
  Container(
             height: 300,

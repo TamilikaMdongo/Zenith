@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:app/models/eventData.dart';
-import 'package:app/screens/ticket.dart';
+//import 'package:app/screens/ticket.dart';
 
 class CreateEvent extends StatefulWidget {
   @override
@@ -99,8 +99,9 @@ Color customColor = Color(0xFFF8F8FF);
     final price = _priceController.text;
     final description = _descriptionController.text;
     
-    DocumentReference doc =
-        await FirebaseFirestore.instance.collection('Event').add({
+    CollectionReference docRef = await FirebaseFirestore.instance.collection('Event');
+      String eventID = docRef.doc().id;
+    final data ={
       'title': eventName,
       'location': venue,
       'date': dateAndTime,
@@ -108,14 +109,17 @@ Color customColor = Color(0xFFF8F8FF);
       'ticketPrice': price,
       'userId':userId,
       'description': description,
-      'eventImage': _base64String
-    });
-    String eventID = doc.id;
+      'eventImage': _base64String,
+      'eventId':eventID
+    };
+  
+    await docRef.doc(eventID).set(data);
+   
     await createTicket(eventID);
   }
 
   List<String> docIDs = [];
-  bool _isLoading = true;
+  //bool _isLoading = true;
 
   Future<void> createTicket(String eventID) async {
     final price = _priceController.text;
@@ -189,6 +193,18 @@ Color customColor = Color(0xFFF8F8FF);
                 ),
               ),
               SizedBox(height: 20),
+               Padding(
+                    padding: const EdgeInsets.only(right: 70.0),
+                    child: Container(
+                      width: 250.0,
+                      child: TextFormField( 
+                        style: TextStyle(),
+                         controller: _descriptionController,
+                        decoration: InputDecoration(hintText: 'Description', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor,  ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.0,),
               Row(
                 children: [
                   Padding(
@@ -237,37 +253,7 @@ Color customColor = Color(0xFFF8F8FF);
                   ),
                 ),
               ),
-              SizedBox(height: 20),Row(
-                children: [
-                  
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: Container(
-                      width: 250.0,
-                      child: TextFormField( 
-                        style: TextStyle(),
-                         
-                        decoration: InputDecoration(hintText: 'Invite guests ', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor,  ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left:10.0, top: 13.0),
-                          child: Text('Add', style: TextStyle(color: Colors.white),),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+              SizedBox(height: 20),
             
               SizedBox(height: 20),
               Padding(
@@ -298,8 +284,7 @@ Color customColor = Color(0xFFF8F8FF);
                    backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                   ),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MyTicketView()));
+                     
                     },
                     child: Text('Create Event', style: TextStyle(color: Colors.white),)),
               ),

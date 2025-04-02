@@ -1,3 +1,4 @@
+import 'package:app/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:app/models/auth.dart';
 import 'package:app/screens/bottom_navbar.dart';
@@ -23,7 +24,7 @@ class _LoginState extends State<Login> {
           context, MaterialPageRoute(builder: (context) => BottomNavBar()));
     }
   }
-
+Color customColor = Color(0xFFF8F8FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,12 +53,15 @@ class _LoginState extends State<Login> {
             SizedBox(height: 20.0),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(right: 90),
-              height: 50.0,
-              width: 250.0,
+              margin: EdgeInsets.only(right: 15),
+              
+              width: 300.0,
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  filled: true,
+                  fillColor: customColor,
                     prefixIcon: Icon(Icons.email),
                     hintText: 'Email',
                     contentPadding: EdgeInsets.all(10)),
@@ -66,12 +70,15 @@ class _LoginState extends State<Login> {
             SizedBox(height: 20.0),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(right: 90),
-              height: 50.0,
-              width: 250.0,
+              margin: EdgeInsets.only(right: 15),
+             
+              width: 300.0,
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  filled: true,
+                  fillColor: customColor,
                     prefixIcon: Icon(Icons.visibility_off),
                     hintText: 'Password',
                     contentPadding: EdgeInsets.all(10)),
@@ -91,7 +98,7 @@ class _LoginState extends State<Login> {
                     child: Container(
                         height: 30,
                         width: 100,
-                        decoration: BoxDecoration(color: Colors.lightGreen),
+                        decoration: BoxDecoration(color: Colors.black),
                         child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -114,8 +121,8 @@ class _LoginState extends State<Login> {
               child: Container(
                 height: 50,
                 width: 200,
-                decoration: BoxDecoration(color: Colors.blue),
-                child: const Center(child: Text('Google')),
+                decoration: BoxDecoration(color: Colors.black),
+                child: const Center(child: Text('Google', style: TextStyle(color: Colors.white),)),
               ),
             ),
             SizedBox(height: 40),
@@ -123,21 +130,26 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text('Dont have an account?'),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                      height: 30,
-                      width: 90,
-                      decoration: BoxDecoration(color: Colors.lightGreen),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Register',
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
-                      )),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Register()));
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                        height: 30,
+                        width: 90,
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Register',
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        )),
+                  ),
                 ),
               ],
             ),
