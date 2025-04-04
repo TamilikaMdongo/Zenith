@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app/models/auth.dart';
 import 'package:app/models/users.dart';
-import 'package:app/screens/bottom_navbar.dart';
+//import 'package:app/screens/bottom_navbar.dart';
 import 'package:app/screens/login.dart';
 
 class Register extends StatefulWidget {
@@ -35,6 +36,7 @@ class _RegisterState extends State<Register> {
   }
 
   Future<void> saveUser() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
     final firstName = _firstNameController.text;
     final lastName = _lastNameController.text;
     final email = _emailController.text;
@@ -45,13 +47,13 @@ class _RegisterState extends State<Register> {
          lastName, 
          email, 
          password,
-         phoneNumber);
+         phoneNumber,currentUser!.uid);
   }
 Color customColor = Color(0xFFF8F8FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.white, shadowColor: Colors.white,),
       body: ListView(children: [
         Column(
           children: [
@@ -84,10 +86,11 @@ Color customColor = Color(0xFFF8F8FF);
                 
                 controller: _firstNameController,
                 decoration: InputDecoration( border: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(10)
+                   borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none
                 ), filled: true,
                 fillColor: customColor,
-                    prefixIcon: Icon(Icons.person),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                    prefixIcon: Icon(Icons.person, color: Colors.black,),
                     hintText: 'First Name',
                     contentPadding: EdgeInsets.all(10)),
               ),
@@ -101,10 +104,11 @@ Color customColor = Color(0xFFF8F8FF);
               child: TextField(
                 controller: _lastNameController,
                 decoration: InputDecoration(border: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(10)
+                   borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none
                 ), filled: true,
                 fillColor: customColor,
-                    prefixIcon: Icon(Icons.person),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                    prefixIcon: Icon(Icons.person, color: Colors.black,),
                     hintText: 'Last Name',
                     contentPadding: EdgeInsets.all(10)),
               ),
@@ -119,10 +123,10 @@ Color customColor = Color(0xFFF8F8FF);
                 controller: _emailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(10)
+                   borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none
                 ), filled: true,
                 fillColor: customColor,
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(Icons.email,color: Colors.black,),
                     hintText: 'Email',
                     contentPadding: EdgeInsets.all(10)),
               ),
@@ -137,11 +141,12 @@ Color customColor = Color(0xFFF8F8FF);
                 controller: _passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none
                   
                 ), filled: true,
                 fillColor: customColor,
-                    prefixIcon: Icon(Icons.visibility_off),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                    prefixIcon: Icon(Icons.visibility_off, color: Colors.black,),
                     hintText: 'Password',
                     contentPadding: EdgeInsets.all(10)),
               ),

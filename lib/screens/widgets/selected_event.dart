@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+// ignore: unused_import
 import 'package:app/models/transaction.dart';
+// ignore: unused_import
 import 'package:app/screens/ticket.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:app/screens/purchase.dart';
 import 'package:pay_with_paystack/pay_with_paystack.dart';
 import 'package:uuid/uuid.dart';
@@ -50,6 +53,7 @@ class _SelectedEventState extends State<SelectedEvent> {
      
       DocumentSnapshot doc = await FirebaseFirestore.instance.collection('Event').doc('CZHfIPMkiBMDlpZqQf70').get();
       
+    // ignore: unused_local_variable
     String docID = doc.id;
     print(doc.id);
 
@@ -66,6 +70,7 @@ class _SelectedEventState extends State<SelectedEvent> {
    
     // get eventID
     
+    // ignore: unused_element
     String? getCurrentUserId() {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid;  // Return the user ID
@@ -79,12 +84,9 @@ class _SelectedEventState extends State<SelectedEvent> {
   Future <void> createTicket () async{
     CollectionReference tickets = FirebaseFirestore.instance.collection('Tickets');
     String ? userId = FirebaseAuth.instance.currentUser?.uid;
+    // ignore: unused_local_variable
     final bool isActive = false;
-    String status = 'Active';
-
-   
-    
-
+    String status = 'Inactive';
     String ticketId = tickets.doc().id;
     var uuid = Uuid();
 String ticketNumber = uuid.v4(); // Generates a random UUID
@@ -127,58 +129,68 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
         String eventImage = eventData ['eventImage'];
         String eventDescription = eventData['description'];
         String eventPrice = eventData['ticketPrice'];
+        String eventTitle = eventData['title'];
         int price = int.parse(eventPrice);
          Uint8List imageBytes = _decodeBase64(eventImage);
        
-        return Column(
-          children: [
-            Container(
-              height: 600,
-              width: 500,
-              child:Image.memory(imageBytes, fit: BoxFit.cover,) ,
-            ),
-            SizedBox(height: 20),
-             Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: Text(eventDescription, style: TextStyle(fontSize: 18),),
-             ),
-              ElevatedButton(
-                    onPressed: () {
-                  //    Navigator.push(context, MaterialPageRoute(builder: (context) => MyTicketView()));
-                    createTicket();
-      
+        return ListView(
+          children:[ Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Container(
+                  height: 600,
+                  width:350,
+                  child:Image.memory(imageBytes, fit: BoxFit.cover,) ,
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Text(eventTitle, style: TextStyle(fontSize: 18),),
+               ),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Text(eventDescription, style: TextStyle(fontSize: 18),),
+               ),
+                ElevatedButton(
+                      onPressed: () {
+                    //    Navigator.push(context, MaterialPageRoute(builder: (context) => MyTicketView()));
+                      createTicket();
+                
+                        
+                        
                       
-                      
-                    
-                    final uniqueTransRef = PayWithPayStack().generateUuidV4();
-      
-                    PayWithPayStack().now(
-                        context: context,
-                        secretKey:"sk_live_e8e7f4cb1d2d50d51b5f5ec1dc66cb85ba6bd522",
-                        // get the user email from the database
-                        customerEmail: "mdongotamilika45@gmail.com",
-                        reference: uniqueTransRef,
-                        currency: "ZAR",
-                        // get the amount from the database
-                        amount: price.toDouble(),
-                        callbackUrl: "https://google.com",
-                        transactionCompleted: (paymentData) {
-                            debugPrint(paymentData.toString());
-                        },
-                        transactionNotCompleted: (reason) {
-                          debugPrint("==> Transaction failed reason $reason");
-                        });
-                       
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white),
-                    child: const Text(
-                      'Buy Tickets',
-                      style: TextStyle(color: Colors.white),
-                    ))
-            
-          ],
+                      final uniqueTransRef = PayWithPayStack().generateUuidV4();
+                
+                      PayWithPayStack().now(
+                          context: context,
+                          secretKey:"sk_live_e8e7f4cb1d2d50d51b5f5ec1dc66cb85ba6bd522",
+                          // get the user email from the database
+                          customerEmail: "mdongotamilika45@gmail.com",
+                          reference: uniqueTransRef,
+                          currency: "ZAR",
+                          // get the amount from the database
+                          amount: price.toDouble(),
+                          callbackUrl: "https://google.com",
+                          transactionCompleted: (paymentData) {
+                              debugPrint(paymentData.toString());
+                          },
+                          transactionNotCompleted: (reason) {
+                            debugPrint("==> Transaction failed reason $reason");
+                          });
+                         
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          foregroundColor: Colors.white),
+                      child: const Text(
+                        'Buy Tickets',
+                        style: TextStyle(color: Colors.white),
+                      ))
+              
+            ],
+          ),]
         );}
       
        

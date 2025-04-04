@@ -1,12 +1,12 @@
 import 'package:app/screens/ticket.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/create_event.dart';
 import 'package:app/screens/discover.dart';
 
 import 'package:app/screens/my_events.dart';
-import 'package:app/screens/profile.dart';
+//import 'package:app/screens/profile.dart';
 
 import 'package:app/screens/home.dart';
 

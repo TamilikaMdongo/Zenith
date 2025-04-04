@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:app/screens/eventManager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,19 +65,23 @@ String? getCurrentUserId() {
                      decoration: BoxDecoration(
                       color: Colors.black
                      ),
-                    child: ListTile(
-                       leading: imageBytes.isNotEmpty
-                          ? Image.memory(imageBytes, height: 50, width: 50, fit: BoxFit.cover) // Display the image
-                          : Icon(Icons.image, color: Colors.white), // Placeholder if no image
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(event['title'], style: TextStyle(color: Colors.white),),
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>EventManager())),
+                      child: ListTile(
+                         leading: imageBytes.isNotEmpty
+                            ? Image.memory(imageBytes, height: 50, width: 50, fit: BoxFit.cover) // Display the image
+                            : Icon(Icons.image, color: Colors.white), // Placeholder if no image
+                        title: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(event['title'], style: TextStyle(color: Colors.white),),
+                        ),
+                        subtitle: Text(event['location']),
+                        trailing: Text('R ${event['ticketPrice']}'),
+                        onTap: () {
+                          // Navigate to event details if needed
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>EventManager()));
+                        },
                       ),
-                      subtitle: Text(event['location']),
-                      trailing: Text('R ${event['ticketPrice']}'),
-                      onTap: () {
-                        // Navigate to event details if needed
-                      },
                     ),
                   ),
                 ],

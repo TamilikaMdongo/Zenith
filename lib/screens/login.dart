@@ -16,19 +16,23 @@ class _LoginState extends State<Login> {
 
   Future<void> signIn() async {
     final String email = _emailController.text;
-    final String Password = _passwordController.text;
-    final user = _authService.signinWithEmailAndPassword(email, Password);
+    final String password = _passwordController.text;
+    final user = await _authService.signinWithEmailAndPassword(email, password);
+    // ignore: unnecessary_null_comparison
     if (user != null) {
       print('welcome back');
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => BottomNavBar()));
+    }
+    else{
+      print('login failed');
     }
   }
 Color customColor = Color(0xFFF8F8FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.white,shadowColor: Colors.white),
       body: ListView(children: [
         Column(
           children: [
@@ -59,10 +63,10 @@ Color customColor = Color(0xFFF8F8FF);
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                   filled: true,
                   fillColor: customColor,
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(Icons.email, color: Colors.black,),
                     hintText: 'Email',
                     contentPadding: EdgeInsets.all(10)),
               ),
@@ -76,10 +80,11 @@ Color customColor = Color(0xFFF8F8FF);
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
                   filled: true,
                   fillColor: customColor,
-                    prefixIcon: Icon(Icons.visibility_off),
+                    prefixIcon: Icon(Icons.visibility_off, color: Colors.black,),
                     hintText: 'Password',
                     contentPadding: EdgeInsets.all(10)),
               ),
@@ -88,10 +93,7 @@ Color customColor = Color(0xFFF8F8FF);
             Padding(
               padding: const EdgeInsets.only(left: 150),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => BottomNavBar()));
-                },
+                onTap: signIn,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: GestureDetector(

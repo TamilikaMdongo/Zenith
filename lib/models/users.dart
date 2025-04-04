@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Users {
   final db = FirebaseFirestore.instance;
-  Future<void> saveUserData(String firstName, String lastName, String email,
+  Future<void> saveUserData(String uid,String firstName, String lastName, String email,
       String password, String phoneNumber) async {
     print('Attempting to print user data');
     final user = <String, dynamic>{
@@ -13,13 +13,14 @@ class Users {
     };
 
     try {
-      await db.collection('Users').add(user);
+      await db.collection('Users').doc(uid).set(user);
       print('User Data saved successfully');
     } catch (error) {
       print(error);
     }
   }
 
+  // ignore: body_might_complete_normally_nullable
   Future<Users?> fetchUserData() async {
     final userData = await db.collection('Users').get();
     print(userData);

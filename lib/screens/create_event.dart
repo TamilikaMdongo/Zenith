@@ -18,7 +18,8 @@ class CreateEvent extends StatefulWidget {
 class _CreateEventState extends State<CreateEvent> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
-  bool _isUploading = false;
+  //bool _isUploading = false;
+  // ignore: unused_field
   String? _imageurl;
   String? _base64String;
 
@@ -29,6 +30,7 @@ class _CreateEventState extends State<CreateEvent> {
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  // ignore: unused_field
   final eventData _eventData = eventData();
 
   @override
@@ -63,6 +65,7 @@ Color customColor = Color(0xFFF8F8FF);
     await _convertToBase64(_imageFile!);
   }
 
+  // ignore: unused_element
   Future<void> _pickImageFromCamera() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
@@ -138,157 +141,143 @@ Color customColor = Color(0xFFF8F8FF);
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Create event'),
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(child: Icon(Icons.arrow_back_ios_new, color: Colors.white,), backgroundColor: Colors.black,),
+          title: Padding(
+            padding: const EdgeInsets.only(left:58.0, top: 10),
+            child: const Text('Create event'),
           ),
+         
+          forceMaterialTransparency: true,
+          backgroundColor: Colors.white,
         ),
-        drawer: Drawer(),
+        drawer: Drawer(
+         
+        ),
         body: ListView(children: [
           Padding(
-            padding: const EdgeInsets.only(top: 100.0),
-            child: Column(children: [
-              
-              Row(
-                children: [
-                  
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: Container(
-                      width: 250.0,
-                      child: TextFormField( 
-                        style: TextStyle(),
-                        controller: _eventNameController, 
-                        decoration: InputDecoration(hintText: 'Enter event name ', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor,  ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
+            padding: const EdgeInsets.only(top: 70.0, left: 50.0),
+            child: Padding(
+              padding: const EdgeInsets.only(left:8.0),
+              child: Column(children: [
+                
+                Row(
+                  children: [
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
                       child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left:10.0, top: 13.0),
-                          child: Text('Description', style: TextStyle(color: Colors.white),),
+                        width: 250.0,
+                        child: TextFormField( 
+                          style: TextStyle(),
+                          controller: _eventNameController, 
+                          decoration: InputDecoration(hintText: 'Enter event name ', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none), focusedBorder: OutlineInputBorder(borderSide: BorderSide.none), filled: true, fillColor: customColor,  ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right:70.0),
-                child: Container(
-                  width: 250.0,
-                  child: TextFormField(
-                    controller: _venueController,
-                    decoration: InputDecoration(hintText: 'Enter the Venue', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor),
+                    
+                  ],
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(right:70.0),
+                  child: Container(
+                    width: 250.0,
+                    child: TextFormField(
+                      controller: _venueController,
+                      decoration: InputDecoration(hintText: 'Enter the Venue', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none), focusedBorder: OutlineInputBorder(borderSide:BorderSide.none), filled: true, fillColor: customColor),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
+                SizedBox(height: 20),
+                 Padding(
+                      padding: const EdgeInsets.only(right: 70.0),
+                      child: Container(
+                        width: 250.0,
+                        child: TextFormField( 
+                          style: TextStyle(),
+                           controller: _descriptionController,
+                          decoration: InputDecoration(hintText: 'Description', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),focusedBorder: OutlineInputBorder(borderSide: BorderSide.none), filled: true, fillColor: customColor,  ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0,),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left:20.0),
+                      child: Container(
+                        width: 250.0,
+                        child: TextFormField(
+                          controller: _dateAndTimeController,
+                          decoration:
+                              InputDecoration(hintText: 'Enter the date ', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),focusedBorder: OutlineInputBorder(borderSide: BorderSide.none), filled: true, fillColor: customColor),
+                        ),
+                      ),
+                    ),
+                   
+                  ],
+                ),
+                SizedBox(height: 20),
                Padding(
-                    padding: const EdgeInsets.only(right: 70.0),
-                    child: Container(
-                      width: 250.0,
-                      child: TextFormField( 
-                        style: TextStyle(),
-                         controller: _descriptionController,
-                        decoration: InputDecoration(hintText: 'Description', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor,  ),
-                      ),
+                  padding: const EdgeInsets.only(right:70.0),
+                  child: Container(
+                    width: 250.0,
+                    child: TextFormField(
+                      controller: _ticketsController,
+                      decoration: InputDecoration(hintText: 'Number of tickects', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),focusedBorder: OutlineInputBorder(borderSide: BorderSide.none), filled: true, fillColor: customColor),
                     ),
-                  ),
-                  SizedBox(height: 20.0,),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left:50.0),
-                    child: Container(
-                      width: 150.0,
-                      child: TextFormField(
-                        controller: _dateAndTimeController,
-                        decoration:
-                            InputDecoration(hintText: 'Enter the date ', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left:20.0),
-                    child: Container(
-                      width: 150.0,
-                      child: TextFormField(
-                        controller: _dateAndTimeController,
-                        decoration:
-                            InputDecoration(hintText: 'Enter the time ', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-             Padding(
-                padding: const EdgeInsets.only(right:70.0),
-                child: Container(
-                  width: 250.0,
-                  child: TextFormField(
-                    controller: _ticketsController,
-                    decoration: InputDecoration(hintText: 'Number of tickects', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right:70.0),
-                child: Container(
-                  width: 250.0,
-                  child: TextFormField(
-                    controller: _priceController,
-                    decoration: InputDecoration(hintText: 'Ticket Price', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), filled: true, fillColor: customColor),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(right:70.0),
+                  child: Container(
+                    width: 250.0,
+                    child: TextFormField(
+                      controller: _priceController,
+                      decoration: InputDecoration(hintText: 'Ticket Price', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),focusedBorder: OutlineInputBorder(borderSide: BorderSide.none), filled: true, fillColor: customColor),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-            
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right: 200),
-                child: const Text('Upload file'),
-              ),
-              _imageFile != null
-                  ? Image.file(_imageFile!, height: 200)
-                  : Icon(Icons.camera_alt_outlined),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right: 150.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black
-                  ),
-                    onPressed: () {
-                      _pickImageFromGallery();
-                      print('you are selecting the image ');
-                    },
-                    child: Text('Upload Image', style: TextStyle(color: Colors.white),)),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 200.0, bottom: 200),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                   backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                    onPressed: () {
-                     
-                    },
-                    child: Text('Create Event', style: TextStyle(color: Colors.white),)),
-              ),
-            ]),
+                SizedBox(height: 20),
+              
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(right: 200),
+                  child: const Text('Upload file'),
+                ),
+                _imageFile != null
+                    ? Image.file(_imageFile!, height: 200)
+                    : Padding(
+                      padding: const EdgeInsets.only(right:228.0),
+                      child: Icon(Icons.camera_alt_outlined),
+                    ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(right: 150.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black
+                    ),
+                      onPressed: () {
+                        _pickImageFromGallery();
+                        print('you are selecting the image ');
+                      },
+                      child: Text('Upload Image', style: TextStyle(color: Colors.white),)),
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 50.0, bottom: 200),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                     backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                    ),
+                      onPressed: () {
+                       
+                      },
+                      child: Text('Create Event', style: TextStyle(color: Colors.white),)),
+                ),
+              ]),
+            ),
           ),
         ]));
   }

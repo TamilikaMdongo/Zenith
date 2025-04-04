@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:app/screens/widgets/selected_event.dart';
+//import 'package:flutter/material.dart';
+//import 'package:app/screens/widgets/selected_event.dart';
 /*
 class Event extends StatelessWidget {
   @override

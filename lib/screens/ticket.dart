@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:uuid_v4/uuid_v4.dart';
+//import 'package:uuid_v4/uuid_v4.dart';
 /*
 class MyTicketView extends StatefulWidget {
   const MyTicketView({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ if (userId == null) {
 
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Ticket')),
+      appBar: AppBar(title: const Text('My Ticket'),forceMaterialTransparency: true,),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
           .collection('Tickets')
@@ -50,7 +50,7 @@ if (userId == null) {
       itemBuilder: (context, index){
          var ticketDoc = eventData[index];
          
-          String ticketId = ticketDoc.id;
+         // String ticketId = ticketDoc.id;
          Map<String, dynamic> ticketData = ticketDoc.data() as Map<String, dynamic>;
           
           
@@ -69,7 +69,7 @@ String truncateTicketNumber(String ticketNumber) {
           return Center(
             child: TicketWidget(
               width: 350,
-              height: 450,
+              height: 500,
               isCornerRounded: true,
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -84,8 +84,8 @@ String truncateTicketNumber(String ticketNumber) {
                   ticketDetailsWidget('Venue', venue, 'Ticket No.', truncateTicketNumber(ticketNumber)),
                   
                   Padding(
-                    padding: const EdgeInsets.only(left:80.0,),
-                    child: QrImageView(data: ticketNumber, size: 150,),
+                    padding: const EdgeInsets.only(left:50.0,),
+                    child: QrImageView(data: ticketNumber, size: 240,),
                   )
       
                 ],
