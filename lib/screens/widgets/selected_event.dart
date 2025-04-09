@@ -10,8 +10,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:app/screens/purchase.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pay_with_paystack/pay_with_paystack.dart';
 import 'package:uuid/uuid.dart';
+
 
 
 class SelectedEvent extends StatefulWidget {
@@ -113,7 +115,7 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
     
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.white, forceMaterialTransparency: true,),
       body: StreamBuilder <DocumentSnapshot>(stream: db.collection('Event').doc(widget.eventId).snapshots(),
       
        builder: (context, snapshot) {
@@ -156,16 +158,16 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
                 ElevatedButton(
                       onPressed: () {
                     //    Navigator.push(context, MaterialPageRoute(builder: (context) => MyTicketView()));
-                      createTicket();
-                
+                     
+                 
                         
                         
                       
                       final uniqueTransRef = PayWithPayStack().generateUuidV4();
-                
+                    final secretKey = dotenv.env['secretKey'] ?? '';
                       PayWithPayStack().now(
                           context: context,
-                          secretKey:"sk_live_e8e7f4cb1d2d50d51b5f5ec1dc66cb85ba6bd522",
+                          secretKey:secretKey,
                           // get the user email from the database
                           customerEmail: "mdongotamilika45@gmail.com",
                           reference: uniqueTransRef,
@@ -174,11 +176,19 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
                           amount: price.toDouble(),
                           callbackUrl: "https://google.com",
                           transactionCompleted: (paymentData) {
+                              createTicket();
                               debugPrint(paymentData.toString());
+                               Navigator.push(context, MaterialPageRoute(builder: (context)
+                              =>MyTicketView()));
+                              
+                             
                           },
                           transactionNotCompleted: (reason) {
                             debugPrint("==> Transaction failed reason $reason");
+                            Navigator.pop(context);
                           });
+
+                          
                          
                       },
                       style: ElevatedButton.styleFrom(

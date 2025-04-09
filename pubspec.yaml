@@ -50,6 +50,7 @@ dependencies:
   uuid_v4: ^1.0.2
   qr_code_scanner_plus: ^2.0.10+1
   flutter_launcher_icons: ^0.14.3
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +87,8 @@ flutter:
   
   assets:
   - assets/images/logo.png
+  - .env
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

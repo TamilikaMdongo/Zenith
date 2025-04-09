@@ -51,7 +51,7 @@ class _DisplayEventsState extends State<DisplayEvents> {
     return Column(children: [
       SizedBox(height: 30,),
       ClipRRect(
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(20),
         
           child: Card(
               

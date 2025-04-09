@@ -5,7 +5,7 @@ class Discover extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: const Text('Discovery'),
+        child: const Text('Coming soon in the full release'),
       ),
     );
   }

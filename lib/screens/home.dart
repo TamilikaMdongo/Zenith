@@ -61,6 +61,10 @@ class _HomeState extends State<Home> {
     ),
     
     drawer: Drawer(
+      child: Padding(
+        padding: const EdgeInsets.only(top:100.0, left: 50.0, ),
+        child: const Text('Coming Soon', style: TextStyle(fontSize: 25.0),),
+      ),
 
     ),
     body: 

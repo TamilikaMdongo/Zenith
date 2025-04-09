@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/screens/my_events.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -159,11 +160,10 @@ Color customColor = Color(0xFFF8F8FF);
               padding: const EdgeInsets.only(left:8.0),
               child: Column(children: [
                 
-                Row(
-                  children: [
+                
                     
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
+                      padding: const EdgeInsets.only(right:65.0),
                       child: Container(
                         width: 250.0,
                         child: TextFormField( 
@@ -174,8 +174,7 @@ Color customColor = Color(0xFFF8F8FF);
                       ),
                     ),
                     
-                  ],
-                ),
+                
                 SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.only(right:70.0),
@@ -200,10 +199,9 @@ Color customColor = Color(0xFFF8F8FF);
                       ),
                     ),
                     SizedBox(height: 20.0,),
-                Row(
-                  children: [
+               
                     Padding(
-                      padding: const EdgeInsets.only(left:20.0),
+                      padding: const EdgeInsets.only(right:58.0),
                       child: Container(
                         width: 250.0,
                         child: TextFormField(
@@ -214,8 +212,7 @@ Color customColor = Color(0xFFF8F8FF);
                       ),
                     ),
                    
-                  ],
-                ),
+                 
                 SizedBox(height: 20),
                Padding(
                   padding: const EdgeInsets.only(right:70.0),
@@ -272,11 +269,11 @@ Color customColor = Color(0xFFF8F8FF);
                      backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                     ),
                       onPressed: () {
-                       
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => MyEvents()));
                       },
                       child: Text('Create Event', style: TextStyle(color: Colors.white),)),
                 ),
-              ]),
+              ]), 
             ),
           ),
         ]));

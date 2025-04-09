@@ -45,6 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:500.0),
+            child: const Text('Disclaimer: Please note that our app is currently in the beta phase. While we’re excited to share it with you, not all features are fully implemented, and there may be occasional bugs or performance issues. We appreciate your feedback as we continue to improve the platform, and we thank you for your patience during this early stage'),
           )
         ],
       ),
