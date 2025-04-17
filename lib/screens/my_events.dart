@@ -6,10 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// fetch event data from firebase
-// map through it 
-// display it in a list tile
-// event must be relevant to the user
+
 
 class MyEvents extends StatefulWidget {
   @override
