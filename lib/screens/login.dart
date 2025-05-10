@@ -2,7 +2,7 @@ import 'package:app/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:app/models/auth.dart';
 import 'package:app/screens/bottom_navbar.dart';
-import 'package:app/screens/home.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -29,6 +29,16 @@ class _LoginState extends State<Login> {
     }
   }
 Color customColor = Color(0xFFF8F8FF);
+
+
+  var _obscure;
+
+  @override 
+  void initState (){
+    super.initState();
+    _obscure = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,13 +88,18 @@ Color customColor = Color(0xFFF8F8FF);
              
               width: 300.0,
               child: TextField(
+                obscureText: _obscure,
                 controller: _passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
                   filled: true,
                   fillColor: customColor,
-                    prefixIcon: Icon(Icons.visibility_off, color: Colors.black,),
+                    prefixIcon: IconButton(icon: _obscure ? Icon(Icons.visibility) : Icon(Icons.visibility_off), onPressed: (){
+                      setState(() {
+                        _obscure = !_obscure;
+                      });
+                    },),
                     hintText: 'Password',
                     contentPadding: EdgeInsets.all(10)),
               ),

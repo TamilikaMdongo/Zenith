@@ -156,10 +156,10 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
                  child: Text(eventDescription, style: TextStyle(fontSize: 18),),
                ),
                 ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                     //    Navigator.push(context, MaterialPageRoute(builder: (context) => MyTicketView()));
                      
-                 
+                 createTicket();
                         
                         
                       
@@ -176,10 +176,9 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
                           amount: price.toDouble(),
                           callbackUrl: "https://google.com",
                           transactionCompleted: (paymentData) {
-                              createTicket();
+                              
                               debugPrint(paymentData.toString());
-                               Navigator.push(context, MaterialPageRoute(builder: (context)
-                              =>MyTicketView()));
+                             
                               
                              
                           },
@@ -187,8 +186,8 @@ String ticketNumber = uuid.v4(); // Generates a random UUID
                             debugPrint("==> Transaction failed reason $reason");
                             Navigator.pop(context);
                           });
+                         
 
-                          
                          
                       },
                       style: ElevatedButton.styleFrom(

@@ -38,16 +38,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
-          backgroundColor: Colors.black, 
+          backgroundColor: Color(0xFFFAFAFA), 
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.greenAccent,
+          selectedItemColor: Colors.black,
   unselectedItemColor: Colors.grey,
           onTap: _onItemTapped,
           items:  <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                color: Colors.white,
+                
               ),
               label: 'Home',backgroundColor: Colors.white
             ),

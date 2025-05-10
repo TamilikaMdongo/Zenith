@@ -76,7 +76,7 @@ String truncateTicketNumber(String ticketNumber) {
                   ticketDetailsWidget('Venue', venue, 'Ticket No.', truncateTicketNumber(ticketNumber)),
                   
                   Padding(
-                    padding: const EdgeInsets.only(left:50.0,),
+                    padding: const EdgeInsets.only(left:30.0,),
                     child: QrImageView(data: ticketNumber, size: 240,),
                   )
       

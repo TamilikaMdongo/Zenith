@@ -36,20 +36,31 @@ class _RegisterState extends State<Register> {
   }
 
   Future<void> saveUser() async {
-    final currentUser = FirebaseAuth.instance.currentUser;
+    String ? userId = FirebaseAuth.instance.currentUser!.uid;
     final firstName = _firstNameController.text;
     final lastName = _lastNameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
     final phoneNumber = _phoneNumberController.text;
+    
     await _userData.saveUserData(
          firstName,
          lastName, 
          email, 
          password,
-         phoneNumber,currentUser!.uid);
+         phoneNumber,
+         userId);
   }
 Color customColor = Color(0xFFF8F8FF);
+
+ var _obscure;
+
+  @override 
+  void initState (){
+    super.initState();
+    _obscure = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,6 +149,7 @@ Color customColor = Color(0xFFF8F8FF);
              
               width: 300.0,
               child: TextField(
+                obscureText: _obscure,
                 controller: _passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -146,8 +158,10 @@ Color customColor = Color(0xFFF8F8FF);
                 ), filled: true,
                 fillColor: customColor,
                 focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                    prefixIcon: Icon(Icons.visibility_off, color: Colors.black,),
-                    hintText: 'Password',
+                    prefixIcon: IconButton(onPressed: (){setState(() {
+                      _obscure=!_obscure;
+                    });}, icon: _obscure ? Icon(Icons.visibility) : Icon(Icons.visibility_off),),
+                    hintText: 'Password must be longer than 6',
                     contentPadding: EdgeInsets.all(10)),
               ),
             ),
