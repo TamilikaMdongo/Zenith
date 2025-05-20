@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Users {
   final db = FirebaseFirestore.instance;
   Future<void> saveUserData(String firstName, String lastName, String email,
-      String password, String phoneNumber, var userId) async {
+      String password, String phoneNumber, String userId) async {
     print('Attempting to print user data');
     final user = <String, dynamic>{
       'lastName': lastName,

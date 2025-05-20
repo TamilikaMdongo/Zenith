@@ -51,7 +51,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               label: 'Home',backgroundColor: Colors.white
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search', backgroundColor: Colors.white),
+
             BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_view_month_rounded), label: 'Events'),
